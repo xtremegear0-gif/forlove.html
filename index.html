@@ -119,9 +119,137 @@
       animation: floatRose 3s ease-in-out infinite;
     }
 
+    .memories-overlay {
+      position: fixed;
+      inset: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: rgba(20, 8, 32, 0.75);
+      backdrop-filter: blur(10px);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+      z-index: 10;
+    }
+
+    .memories-overlay.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .memories-card {
+      width: min(500px, calc(100vw - 40px));
+      padding: 28px;
+      border-radius: 32px;
+      background: rgba(255, 255, 255, 0.96);
+      box-shadow: 0 30px 60px rgba(33, 9, 45, 0.25);
+      text-align: left;
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 18px;
+      right: 18px;
+      width: 38px;
+      height: 38px;
+      border: none;
+      border-radius: 50%;
+      background: #f8d4e2;
+      color: #8d2c5c;
+      font-size: 1.3rem;
+      cursor: pointer;
+      box-shadow: 0 10px 20px rgba(142, 32, 78, 0.18);
+    }
+
+    .memories-header {
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: #5a1f3a;
+      margin-bottom: 10px;
+    }
+
+    .memories-text {
+      margin-bottom: 20px;
+      color: #7f3f59;
+      line-height: 1.75;
+    }
+
+    .preview-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+
+    .preview-item {
+      aspect-ratio: 1 / 1;
+      background: linear-gradient(135deg, #ffe8f3, #ffd2e8);
+      border-radius: 22px;
+      display: grid;
+      place-items: center;
+      color: #a95276;
+      font-size: 0.9rem;
+      padding: 12px;
+      overflow: hidden;
+      position: relative;
+      background-size: cover;
+      background-position: center;
+    }
+
+    .preview-item.photo {
+      color: transparent;
+    }
+
+    .controls {
+      display: grid;
+      gap: 14px;
+    }
+
+    .file-upload {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 14px 20px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, #d1276c, #f05b9c);
+      color: white;
+      font-weight: 700;
+      cursor: pointer;
+      width: fit-content;
+    }
+
+    .file-upload input {
+      display: none;
+    }
+
+    textarea {
+      width: 100%;
+      min-height: 120px;
+      border: none;
+      border-radius: 20px;
+      padding: 16px;
+      resize: vertical;
+      font-family: inherit;
+      font-size: 1rem;
+      background: #fff1f7;
+      color: #5a1f3a;
+      line-height: 1.6;
+      box-shadow: inset 0 0 0 1px rgba(209, 40, 118, 0.12);
+    }
+
+    .button.save {
+      width: 100%;
+      margin-top: 4px;
+    }
+
     @media (max-width: 420px) {
       .card {
         padding: 30px 22px;
+      }
+
+      .preview-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
       }
     }
 
@@ -172,13 +300,71 @@
     <div class="icon">🌹</div>
   </div>
 
+  <div class="memories-overlay" id="memoriesOverlay">
+    <div class="memories-card">
+      <button class="close-btn" onclick="closeMemories()">×</button>
+      <div class="memories-header">Sweet Memories</div>
+      <p class="memories-text">Share your best photos and write a lovely message for her. Add pictures below and the text will appear instantly.</p>
+      <div class="preview-grid" id="previewGrid">
+        <div class="preview-item">Tap + to add photos</div>
+        <div class="preview-item">Your special story goes here</div>
+        <div class="preview-item">Make this memory shine</div>
+      </div>
+      <div class="controls">
+        <label class="file-upload">
+          + Add photos
+          <input id="imageInput" type="file" accept="image/*" multiple>
+        </label>
+        <textarea id="memoryText" placeholder="Write your lovely message here...">You are my favorite person to me in every moment.</textarea>
+      </div>
+      <button class="button save" onclick="saveMemory()">Save Memory</button>
+    </div>
+  </div>
+
   <script>
     function showLove() {
-      alert('Yes, I will be yours 💕');
+      document.getElementById('memoriesOverlay').classList.add('active');
+    }
+
+    function closeMemories() {
+      document.getElementById('memoriesOverlay').classList.remove('active');
+    }
+
+    function saveMemory() {
+      const text = document.getElementById('memoryText').value.trim();
+      const message = text ? 'Your lovely memory is saved 💖' : 'A loving memory is ready whenever you are.';
+      alert(message);
     }
 
     const scene = document.getElementById('scene');
     const petals = 18;
+    const previewGrid = document.getElementById('previewGrid');
+    const imageInput = document.getElementById('imageInput');
+
+    imageInput.addEventListener('change', function() {
+      previewGrid.innerHTML = '';
+      const files = Array.from(imageInput.files).slice(0, 6);
+
+      if (!files.length) {
+        previewGrid.innerHTML = '<div class="preview-item">No photos yet. Add some special moments.</div>';
+        return;
+      }
+
+      files.forEach(file => {
+        const reader = new FileReader();
+        const item = document.createElement('div');
+        item.className = 'preview-item photo';
+        item.textContent = 'Loading...';
+
+        reader.onload = () => {
+          item.style.backgroundImage = `url(${reader.result})`;
+          item.textContent = '';
+        };
+
+        reader.readAsDataURL(file);
+        previewGrid.appendChild(item);
+      });
+    });
 
     for (let i = 0; i < petals; i++) {
       const petal = document.createElement('div');
