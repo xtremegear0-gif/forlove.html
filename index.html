@@ -166,18 +166,89 @@
       z-index: 10;
     }
 
+    .memories-card {
+      width: min(560px, calc(100vw - 40px));
+      padding: 28px;
+      border-radius: 36px;
+      background: rgba(255, 255, 255, 0.96);
+      box-shadow: 0 30px 70px rgba(33, 9, 45, 0.28);
+      text-align: center;
+      animation: popIn 0.9s ease;
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      margin: 24px 0 20px;
+    }
+
+    .preview-item {
+      aspect-ratio: 4 / 5;
+      border-radius: 28px;
+      background: white;
+      box-shadow: 0 12px 28px rgba(209, 40, 118, 0.12);
+      overflow: hidden;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.85rem;
+      color: #ad5d7d;
+      padding: 16px;
+      border: 5px solid white;
+      transform: translateY(0);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+      background-size: cover;
+      background-position: center;
+    }
+
+    .preview-item:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 18px 32px rgba(209, 40, 118, 0.18);
+    }
+
+    .preview-item.photo {
+      color: transparent;
+    }
+
+    .memories-gallery-title {
+      font-size: clamp(2rem, 4vw, 3rem);
+      line-height: 1.05;
+      font-family: 'Georgia', serif;
+      color: #c92f6f;
+      margin-bottom: 8px;
+      text-shadow: 0 8px 22px rgba(201, 47, 111, 0.15);
+    }
+
+    .memories-gallery-text {
+      font-size: 1rem;
+      color: #7f3f59;
+      line-height: 1.7;
+      margin-bottom: 24px;
+    }
+
+    .gift-button {
+      margin-top: 8px;
+      padding: 16px 40px;
+      border-radius: 999px;
+      width: auto;
+    }
+
+    @keyframes popIn {
+      from {
+        opacity: 0;
+        transform: translateY(24px) scale(0.97);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
     .memories-overlay.active {
       opacity: 1;
       pointer-events: auto;
-    }
-
-    .memories-card {
-      width: min(500px, calc(100vw - 40px));
-      padding: 28px;
-      border-radius: 32px;
-      background: rgba(255, 255, 255, 0.96);
-      box-shadow: 0 30px 60px rgba(33, 9, 45, 0.25);
-      text-align: left;
     }
 
     .close-btn {
@@ -195,93 +266,12 @@
       box-shadow: 0 10px 20px rgba(142, 32, 78, 0.18);
     }
 
-    .memories-header {
-      font-size: 1.6rem;
-      font-weight: 700;
-      color: #5a1f3a;
-      margin-bottom: 10px;
-    }
-
-    .memories-text {
-      margin-bottom: 20px;
-      color: #7f3f59;
-      line-height: 1.75;
-    }
-
-    .preview-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 12px;
-      margin-bottom: 18px;
-    }
-
-    .preview-item {
-      aspect-ratio: 1 / 1;
-      background: linear-gradient(135deg, #ffe8f3, #ffd2e8);
-      border-radius: 22px;
-      display: grid;
-      place-items: center;
-      color: #a95276;
-      font-size: 0.9rem;
-      padding: 12px;
-      overflow: hidden;
-      position: relative;
-      background-size: cover;
-      background-position: center;
-    }
-
-    .preview-item.photo {
-      color: transparent;
-    }
-
-    .controls {
-      display: grid;
-      gap: 14px;
-    }
-
-    .file-upload {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      padding: 14px 20px;
-      border-radius: 999px;
-      background: linear-gradient(135deg, #d1276c, #f05b9c);
-      color: white;
-      font-weight: 700;
-      cursor: pointer;
-      width: fit-content;
-    }
-
-    .file-upload input {
-      display: none;
-    }
-
-    textarea {
-      width: 100%;
-      min-height: 120px;
-      border: none;
-      border-radius: 20px;
-      padding: 16px;
-      resize: vertical;
-      font-family: inherit;
-      font-size: 1rem;
-      background: #fff1f7;
-      color: #5a1f3a;
-      line-height: 1.6;
-      box-shadow: inset 0 0 0 1px rgba(209, 40, 118, 0.12);
-    }
-
-    .button.save {
-      width: 100%;
-      margin-top: 4px;
-    }
-
     @media (max-width: 420px) {
       .card {
         padding: 30px 22px;
       }
 
-      .preview-grid {
+      .gallery-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
     }
@@ -344,21 +334,17 @@
   <div class="memories-overlay" id="memoriesOverlay">
     <div class="memories-card">
       <button class="close-btn" onclick="closeMemories()">×</button>
-      <div class="memories-header">Sweet Memories</div>
-      <p class="memories-text">Share your best photos and write a lovely message for her. Add pictures below and the text will appear instantly.</p>
-      <div class="preview-grid" id="previewGrid">
-        <div class="preview-item">Tap + to add photos</div>
-        <div class="preview-item">Your special story goes here</div>
-        <div class="preview-item">Make this memory shine</div>
+      <div class="memories-gallery-title">Our Love Moments</div>
+      <p class="memories-gallery-text">A beautiful collection of memories created just for us. Tap the gift button to celebrate our love.</p>
+      <div class="gallery-grid" id="previewGrid">
+        <div class="preview-item">Your first kiss</div>
+        <div class="preview-item">Late night smiles</div>
+        <div class="preview-item">Cozy moments</div>
+        <div class="preview-item">Sweet adventures</div>
+        <div class="preview-item">Dreamy afternoons</div>
+        <div class="preview-item">Forever us</div>
       </div>
-      <div class="controls">
-        <label class="file-upload">
-          + Add photos
-          <input id="imageInput" type="file" accept="image/*" multiple>
-        </label>
-        <textarea id="memoryText" placeholder="Write your lovely message here...">You are my favorite person to me in every moment.</textarea>
-      </div>
-      <button class="button save" onclick="saveMemory()">Save Memory</button>
+      <button class="button gift-button" onclick="pickGift()">Pick a Gift</button>
     </div>
   </div>
 
@@ -389,41 +375,12 @@
       document.getElementById('memoriesOverlay').classList.remove('active');
     }
 
-    function saveMemory() {
-      const text = document.getElementById('memoryText').value.trim();
-      const message = text ? 'Your lovely memory is saved 💖' : 'A loving memory is ready whenever you are.';
-      alert(message);
+    function pickGift() {
+      alert('A beautiful gift just for you 💝');
     }
 
     const scene = document.getElementById('scene');
     const petals = 18;
-    const previewGrid = document.getElementById('previewGrid');
-    const imageInput = document.getElementById('imageInput');
-
-    imageInput.addEventListener('change', function() {
-      previewGrid.innerHTML = '';
-      const files = Array.from(imageInput.files).slice(0, 6);
-
-      if (!files.length) {
-        previewGrid.innerHTML = '<div class="preview-item">No photos yet. Add some special moments.</div>';
-        return;
-      }
-
-      files.forEach(file => {
-        const reader = new FileReader();
-        const item = document.createElement('div');
-        item.className = 'preview-item photo';
-        item.textContent = 'Loading...';
-
-        reader.onload = () => {
-          item.style.backgroundImage = `url(${reader.result})`;
-          item.textContent = '';
-        };
-
-        reader.readAsDataURL(file);
-        previewGrid.appendChild(item);
-      });
-    });
 
     for (let i = 0; i < petals; i++) {
       const petal = document.createElement('div');
