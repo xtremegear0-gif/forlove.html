@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Will You Be Mine?</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: radial-gradient(circle at top, #ffe6f0 0%, #ffd7e8 40%, #f7d3ff 100%);
+      overflow: hidden;
+      color: #5a1f3a;
+      text-align: center;
+    }
+
+    .scene {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .petal {
+      position: absolute;
+      width: 18px;
+      height: 18px;
+      background: rgba(255, 255, 255, 0.85);
+      border-radius: 50% 50% 50% 0;
+      transform: rotate(45deg);
+      filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.25));
+      animation: drift 8s ease-in infinite;
+    }
+
+    .card {
+      position: relative;
+      width: min(410px, calc(100vw - 40px));
+      padding: 40px 30px;
+      border-radius: 36px;
+      background: rgba(255, 255, 255, 0.95);
+      box-shadow: 0 18px 40px rgba(118, 0, 69, 0.18);
+      backdrop-filter: blur(16px);
+      z-index: 2;
+      animation: cardPop 1.2s ease;
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      background: linear-gradient(145deg, rgba(255, 204, 221, 0.3), transparent 60%);
+      pointer-events: none;
+    }
+
+    .label {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 18px;
+      font-size: 14px;
+      letter-spacing: 0.2em;
+      color: #c64b75;
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+
+    .title {
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      line-height: 1.1;
+      font-family: 'Georgia', serif;
+      margin-bottom: 18px;
+      text-shadow: 0 4px 18px rgba(179, 54, 97, 0.18);
+    }
+
+    .subtitle {
+      font-size: 1.05rem;
+      line-height: 1.85;
+      max-width: 320px;
+      margin: 0 auto 30px;
+      color: #7f3f59;
+    }
+
+    .button {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      padding: 16px 42px;
+      border-radius: 999px;
+      border: none;
+      background: linear-gradient(135deg, #d1276c, #f05b9c);
+      color: white;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+      box-shadow: 0 18px 35px rgba(209, 40, 118, 0.25);
+    }
+
+    .button:hover {
+      transform: translateY(-2px) scale(1.02);
+      box-shadow: 0 22px 40px rgba(209, 40, 118, 0.35);
+    }
+
+    .icon {
+      margin-top: 10px;
+      font-size: 3rem;
+      opacity: 0.85;
+      animation: floatRose 3s ease-in-out infinite;
+    }
+
+    @media (max-width: 420px) {
+      .card {
+        padding: 30px 22px;
+      }
+    }
+
+    @keyframes drift {
+      from {
+        transform: translate3d(var(--x, 0px), -20px, 0) rotate(var(--r, 45deg));
+        opacity: 0;
+      }
+      30% {
+        opacity: 0.85;
+      }
+      to {
+        transform: translate3d(calc(var(--x, 0px) + 30px), 110vh, 0) rotate(calc(var(--r, 45deg) + 50deg));
+        opacity: 0;
+      }
+    }
+
+    @keyframes cardPop {
+      from {
+        opacity: 0;
+        transform: translateY(30px) scale(0.95);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    @keyframes floatRose {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-10px);
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="scene" id="scene"></div>
+
+  <div class="card">
+    <div class="label">A sweet question</div>
+    <h1 class="title">Will you be mine.?</h1>
+    <p class="subtitle">A rose for the person who makes my world more beautiful just by being in it.</p>
+    <button class="button" onclick="showLove()">Open Memories</button>
+    <div class="icon">🌹</div>
+  </div>
+
+  <script>
+    function showLove() {
+      alert('Yes, I will be yours 💕');
+    }
+
+    const scene = document.getElementById('scene');
+    const petals = 18;
+
+    for (let i = 0; i < petals; i++) {
+      const petal = document.createElement('div');
+      petal.className = 'petal';
+      petal.style.left = Math.random() * 100 + 'vw';
+      petal.style.top = Math.random() * 20 + 'vh';
+      petal.style.setProperty('--x', Math.random() * 60 - 30 + 'px');
+      petal.style.setProperty('--r', Math.random() * 90 + 'deg');
+      petal.style.animationDuration = 6 + Math.random() * 4 + 's';
+      petal.style.animationDelay = Math.random() * -8 + 's';
+      petal.style.opacity = 0.75 + Math.random() * 0.2;
+      scene.appendChild(petal);
+    }
+  </script>
+</body>
+</html>
