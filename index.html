@@ -112,11 +112,44 @@
       box-shadow: 0 22px 40px rgba(209, 40, 118, 0.35);
     }
 
-    .icon {
-      margin-top: 10px;
-      font-size: 3rem;
-      opacity: 0.85;
-      animation: floatRose 3s ease-in-out infinite;
+    .choice-group {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin: 24px 0 10px;
+    }
+
+    .choice-button {
+      min-width: 120px;
+      border-radius: 999px;
+      background: #f9c8db;
+      color: #5a1f3a;
+      box-shadow: inset 0 0 0 1px rgba(209, 40, 118, 0.12);
+    }
+
+    .choice-button.selected {
+      background: linear-gradient(135deg, #d1276c, #f05b9c);
+      color: white;
+      box-shadow: 0 8px 18px rgba(209, 40, 118, 0.2);
+    }
+
+    .choice-text {
+      margin-top: 16px;
+      font-size: 1rem;
+      color: #7f3f59;
+    }
+
+    .open-button-wrap {
+      margin-top: 20px;
+      display: none;
+    }
+
+    .choice-result {
+      margin-top: 12px;
+      color: #7f3f59;
+      font-size: 0.97rem;
+      min-height: 1.45em;
     }
 
     .memories-overlay {
@@ -296,7 +329,15 @@
     <div class="label">A sweet question</div>
     <h1 class="title">Will you be mine.?</h1>
     <p class="subtitle">A rose for the person who makes my world more beautiful just by being in it.</p>
-    <button class="button" onclick="showLove()">Open Memories</button>
+    <div class="choice-text">Choose yes or no, then open the memories screen.</div>
+    <div class="choice-group">
+      <button class="button choice-button" id="yesBtn" onclick="chooseAnswer('yes')">Yes</button>
+      <button class="button choice-button" id="noBtn" onclick="chooseAnswer('no')">No</button>
+    </div>
+    <div class="choice-result" id="choiceResult"></div>
+    <div class="open-button-wrap" id="openButtonWrap">
+      <button class="button" onclick="showLove()">Open Memories</button>
+    </div>
     <div class="icon">🌹</div>
   </div>
 
@@ -324,6 +365,24 @@
   <script>
     function showLove() {
       document.getElementById('memoriesOverlay').classList.add('active');
+    }
+
+    function chooseAnswer(choice) {
+      const openButtonWrap = document.getElementById('openButtonWrap');
+      const choiceResult = document.getElementById('choiceResult');
+      const yesBtn = document.getElementById('yesBtn');
+      const noBtn = document.getElementById('noBtn');
+
+      openButtonWrap.style.display = 'block';
+      if (choice === 'yes') {
+        choiceResult.textContent = 'You chose yes. Now open memories to see the special moments.';
+        yesBtn.classList.add('selected');
+        noBtn.classList.remove('selected');
+      } else {
+        choiceResult.textContent = 'You chose no. Still, open memories to see your beautiful memories.';
+        noBtn.classList.add('selected');
+        yesBtn.classList.remove('selected');
+      }
     }
 
     function closeMemories() {
