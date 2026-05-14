@@ -319,7 +319,7 @@
     <div class="label">A sweet question</div>
     <h1 class="title">Will you be mine.?</h1>
     <p class="subtitle">A rose for the person who makes my world more beautiful just by being in it.</p>
-    <div class="choice-text">Choose yes or no, then open the memories screen.</div>
+    <div class="choice-text">Choose yes or no.</div>
     <div class="choice-group">
       <button class="button choice-button" id="yesBtn" onclick="chooseAnswer('yes')">Yes</button>
       <button class="button choice-button" id="noBtn" onclick="chooseAnswer('no')">No</button>
@@ -361,11 +361,11 @@
 
       openButtonWrap.style.display = 'block';
       if (choice === 'yes') {
-        choiceResult.textContent = 'You chose yes. Now open memories to see the special moments.';
+        choiceResult.textContent = 'You choose yes. Now open memories to see the special moments.';
         yesBtn.classList.add('selected');
         noBtn.classList.remove('selected');
       } else {
-        choiceResult.textContent = 'You chose no. Still, open memories to see your beautiful memories.';
+        choiceResult.textContent = 'You choose no. Still, open memories to see your beautiful memories.';
         noBtn.classList.add('selected');
         yesBtn.classList.remove('selected');
       }
