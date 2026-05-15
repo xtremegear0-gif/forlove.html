@@ -446,41 +446,16 @@
     50% { transform: scale(1.05); }
     100% { transform: scale(1); }
   }
-</style>
-
-<div id="roseOverlay" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:#fce4ec; z-index:9999; flex-direction:column; align-items:center; justify-content:center; backdrop-filter: blur(5px);">
-    <div style="background: rgba(255, 255, 255, 0.9); padding: 40px; border-radius: 30px; border: 2px solid white; text-align: center; box-shadow: 0 15px 35px rgba(0,0,0,0.1); width: 85%; max-width: 500px;">
-        <h1 style="color: #c2185b; margin-bottom: 10px; font-family: 'Georgia', serif;">Pick a Gift! 🌹</h1>
-        <p style="color: #880e4f; font-style: italic;">Choose the most beautiful rose for yourself...</p>
-        
-        <div class="rose-container">
-            <span class="animating-rose" onclick="handleRoseClick(1)">🌹</span>
-            <span class="animating-rose" onclick="handleRoseClick(2)">🌹</span>
-            <span class="animating-rose" onclick="handleRoseClick(3)">🌹</span>
-        </div>
-        
-        <div id="roseMessage"></div>
-    </div>
+<button onclick="pickGift()" class="final-note-btn">Pick a Gift</button>
 </div>
 
-<div id="letterOverlay" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); z-index:10000; align-items:center; justify-content:center; backdrop-filter: blur(10px);">
-    <div class="notebook-paper">
-        <div class="margin-line"></div>
-        <h2 style="text-align: center; color: #c2185b; margin-bottom: 25px; font-family: 'Cursive', sans-serif;">From My Heart</h2>
-        <div style="color: #333; font-size: 17px; padding-left: 55px; padding-right: 15px; text-align: left;">
-            <p style="margin: 0;">My Dearest,</p>
-            <p style="margin: 15px 0;">Just like a rose, your love fills my life with fragrance and color. I want to tell you that you are my most precious treasure.</p>
-            <p style="margin: 15px 0;">I promise to keep our love blooming forever.</p>
-            <div style="text-align: right; margin-top: 35px; width: 100%; font-weight: bold; color: #c2185b;">
-                I love you ❤️ Always Yours ❤️
-            </div>
-        </div>
-        <button onclick="document.getElementById('letterOverlay').style.display='none'" class="final-note-btn">
-            One Final Note
-        </button>
-    </div>
-</div>
 <script>
+// 1. Is se Roses wala selection khulega
+function pickGift() {
+    document.getElementById('roseOverlay').style.display = 'flex';
+}
+
+// 2. Is se Rose click karne par message aayega aur Note khulega
 function handleRoseClick(num) {
     const msg = document.getElementById('roseMessage');
     if (num === 1 || num === 3) {
@@ -488,8 +463,10 @@ function handleRoseClick(num) {
         msg.style.color = "#c2185b";
     } else if (num === 2) {
         msg.innerHTML = "You found it! Now opening your secret note... ❤️";
-        msg.style.color = "#2e7d32";
+        msg.style.color = "green";
         setTimeout(() => {
+            // Roses band aur Diary wala note open
+            document.getElementById('roseOverlay').style.display = 'none';
             document.getElementById('letterOverlay').style.display = 'flex';
         }, 1200);
     }
