@@ -439,11 +439,11 @@ function openRose(roseNumber) {
         <p style="color: #880e4f; font-size: 16px; margin-bottom: 40px;">One of these roses holds a<br>secret message...</p>
 
         <div style="display: flex; justify-content: center; gap: 20px;">
-            <span class="animating-rose" onclick="openRose()">🌹</span>
-            <span class="animating-rose" onclick="openRose()">🌹</span>
-            <span class="animating-rose" onclick="openRose()">🌹</span>
+            <span class="animating-rose" onclick="openRose(1)">🌹</span>
+            <span class="animating-rose" onclick="openRose(2)">🌹</span>
+            <span class="animating-rose" onclick="openRose(3)">🌹</span>
         </div>
-
+<p id="roseMessage" style="text-align:center; font-weight:bold; margin-top:20px; min-height:20px; font-size:18px; color:#c2185b;"></p>
         <br><br>
         <button onclick="document.getElementById('roseOverlay').style.display='none'" style="background:none; border:none; color:#c2185b; text-decoration:underline; cursor:pointer; font-weight:bold;">Go Back</button>
     </div>
