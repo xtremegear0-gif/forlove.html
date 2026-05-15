@@ -449,14 +449,23 @@ function openRose(roseNumber) {
     </div>
 </div>
 </div>
-<div id="letterOverlay" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(255,192,203,0.9); z-index:10000; align-items:center; justify-content:center;">
-    <div style="background:#fff9e6; padding:30px; border-radius:10px; width:80%; max-width:400px; font-family:serif; border:1px solid #ddd;">
-        <h2 style="color:#c2185b; text-align:center;">From My Heart</h2>
-        <p>My Dearest,</p>
-        <p>Just like a rose, your love fills my life with fragrance and color. On this special day, I want to tell you that you are my most precious treasure.</p>
-        <p>I promise to keep our love blooming forever.</p>
-        <p style="text-align:right;">Always Yours ❤️</p>
-        <button onclick="document.getElementById('letterOverlay').style.display='none'" style="display:block; margin:auto; background:#c2185b; color:white; border:none; padding:10px 20px; border-radius:5px;">Close</button>
+<div id="letterOverlay" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.4); z-index:10000; align-items:center; justify-content:center; backdrop-filter: blur(5px);">
+    
+    <div style="background: #fff9e6; width: 85%; max-width: 450px; padding: 40px 30px; border-radius: 15px; box-shadow: 0 20px 40px rgba(0,0,0,0.3); border-left: 10px solid #c2185b; font-family: 'Georgia', serif; position: relative; overflow: hidden; background-image: repeating-linear-gradient(#fff9e6, #fff9e6 31px, #e1d4ae 32px);">
+        
+        <div style="position: absolute; left: 40px; top: 0; bottom: 0; width: 1px; background: rgba(255, 0, 0, 0.2);"></div>
+
+        <h2 style="text-align: center; color: #c2185b; font-family: 'Cursive', sans-serif; margin-bottom: 25px; text-shadow: 1px 1px 2px rgba(0,0,0,0.1);">From My Heart</h2>
+        
+        <div style="line-height: 32px; color: #444; font-size: 17px; padding-left: 20px;">
+            <p style="margin: 0;">My Dearest,</p>
+            <p style="margin: 15px 0;">Just like a rose, your love fills my life with fragrance and color. I want to tell you that you are my most precious treasure.</p>
+            <p style="margin: 15px 0;">I promise to keep our love blooming forever.</p>
+            <p style="text-align: right; margin-top: 30px; font-weight: bold; color: #c2185b;"> i love you ❤️ Always Yours ❤️</p>
+        </div>
+<button onclick="document.getElementById('letterOverlay').style.display='none'" class="final-note-btn">
+    One Final Note
+</button>
     </div>
 </div>
 </body>
