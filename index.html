@@ -374,7 +374,44 @@
     function closeMemories() {
       document.getElementById('memoriesOverlay').classList.remove('active');
     }
-
+<style>
+  .notebook-paper {
+    background: #fff9e6;
+    width: 90%;
+    max-width: 420px;
+    padding: 40px 20px;
+    border-radius: 15px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+    border-left: 12px solid #c2185b;
+    font-family: 'Georgia', serif;
+    position: relative;
+    background-image: repeating-linear-gradient(#fff9e6, #fff9e6 31px, #e1d4ae 32px);
+    line-height: 32px; 
+  }
+  .margin-line {
+    position: absolute;
+    left: 45px; top: 0; bottom: 0; width: 1px;
+    background: rgba(255, 0, 0, 0.2);
+  }
+  .final-note-btn {
+    display: block;
+    margin: 30px auto 0;
+    padding: 12px 35px;
+    background: #c2185b;
+    color: white;
+    border: none;
+    border-radius: 30px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(194, 24, 91, 0.4);
+    animation: pulseBtn 2s infinite;
+  }
+  @keyframes pulseBtn {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+  }
+</style>
 function pickGift() {
     document.getElementById('roseOverlay').style.display = 'flex';
 }
@@ -411,28 +448,65 @@ function openRose(roseNumber) {
  
 </div>
 <div id="roseOverlay" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:#fce4ec; z-index:9999; flex-direction:column; align-items:center; justify-content:center; font-family: sans-serif;">
-    
     <style>
-        @keyframes roseBounce {
-            0%, 100% { transform: translateY(0) scale(1); }
-            50% { transform: translateY(-15px) scale(1.1); }
-        }
-        .animating-rose {
-            display: inline-block;
-            cursor: pointer;
-            font-size: 60px;
-            transition: transform 0.3s ease;
-            animation: roseBounce 2s infinite ease-in-out;
-        }
-        .animating-rose:nth-child(2) { animation-delay: 0.3s; }
-        .animating-rose:nth-child(3) { animation-delay: 0.6s; }
-        
-        .animating-rose:hover {
-            filter: drop-shadow(0 0 15px #ff4081);
-            animation-play-state: paused;
-            transform: scale(1.3);
-        }
-    </style>
+  /* Notebook Paper Styling */
+  .notebook-paper {
+    background: #fff9e6;
+    width: 90%;
+    max-width: 420px;
+    padding: 40px 20px;
+    border-radius: 15px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+    border-left: 12px solid #c2185b;
+    font-family: 'Georgia', serif;
+    position: relative;
+    /* 32px line spacing to match text height */
+    background-image: repeating-linear-gradient(#fff9e6, #fff9e6 31px, #e1d4ae 32px);
+    line-height: 32px; 
+  }
+
+  .margin-line {
+    position: absolute;
+    left: 45px;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: rgba(255, 0, 0, 0.2);
+  }
+
+  /* Animated Pulse Button */
+  .final-note-btn {
+    display: block;
+    margin: 30px auto 0;
+    padding: 12px 35px;
+    background: #c2185b;
+    color: white;
+    border: none;
+    border-radius: 30px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(194, 24, 91, 0.4);
+    animation: pulseBtn 2s infinite;
+  }
+
+  @keyframes pulseBtn {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+  }
+
+  /* Keep your Rose bounce animation */
+  @keyframes roseBounce {
+    0%, 100% { transform: translateY(0) scale(1); }
+    50% { transform: translateY(-15px) scale(1.1); }
+  }
+  .animating-rose {
+    display: inline-block;
+    cursor: pointer;
+    font-size: 60px;
+    animation: roseBounce 2s infinite ease-in-out;
+  }
+</style>
 
     <div style="background: rgba(255, 255, 255, 0.6); padding: 40px; border-radius: 30px; border: 2px solid white; text-align: center; width: 85%; box-shadow: 0 10px 25px rgba(0,0,0,0.05);">
         <h1 style="color: #c2185b; font-style: italic; font-size: 35px; margin-bottom: 10px;">Pick a Rose</h1>
@@ -449,23 +523,26 @@ function openRose(roseNumber) {
     </div>
 </div>
 </div>
-<div id="letterOverlay" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.4); z-index:10000; align-items:center; justify-content:center; backdrop-filter: blur(5px);">
+<div id="letterOverlay" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); z-index:10000; align-items:center; justify-content:center; backdrop-filter: blur(8px);">
     
-    <div style="background: #fff9e6; width: 85%; max-width: 450px; padding: 40px 30px; border-radius: 15px; box-shadow: 0 20px 40px rgba(0,0,0,0.3); border-left: 10px solid #c2185b; font-family: 'Georgia', serif; position: relative; overflow: hidden; background-image: repeating-linear-gradient(#fff9e6, #fff9e6 31px, #e1d4ae 32px);">
+    <div class="notebook-paper">
+        <div class="margin-line"></div>
         
-        <div style="position: absolute; left: 40px; top: 0; bottom: 0; width: 1px; background: rgba(255, 0, 0, 0.2);"></div>
-
-        <h2 style="text-align: center; color: #c2185b; font-family: 'Cursive', sans-serif; margin-bottom: 25px; text-shadow: 1px 1px 2px rgba(0,0,0,0.1);">From My Heart</h2>
+        <h2 style="text-align: center; color: #c2185b; margin: 0 0 25px 0; font-family: cursive;">From My Heart</h2>
         
-        <div style="line-height: 32px; color: #444; font-size: 17px; padding-left: 20px;">
+        <div style="color: #333; font-size: 16px; padding-left: 50px; padding-right: 10px; text-align: left;">
             <p style="margin: 0;">My Dearest,</p>
-            <p style="margin: 15px 0;">Just like a rose, your love fills my life with fragrance and color. I want to tell you that you are my most precious treasure.</p>
-            <p style="margin: 15px 0;">I promise to keep our love blooming forever.</p>
-            <p style="text-align: right; margin-top: 30px; font-weight: bold; color: #c2185b;"> i love you ❤️ Always Yours ❤️</p>
+            <p style="margin: 0;">Just like a rose, your love fills my life with fragrance and color. I want to tell you that you are my most precious treasure.</p>
+            <p style="margin: 0;">I promise to keep our love blooming forever.</p>
+            
+            <div style="text-align: center; margin-top: 32px; width: 100%;">
+                <span style="color: #c2185b; font-weight: bold;">I love you ❤️ Always Yours ❤️</span>
+            </div>
         </div>
-<button onclick="document.getElementById('letterOverlay').style.display='none'" class="final-note-btn">
-    One Final Note
-</button>
+
+        <button onclick="document.getElementById('letterOverlay').style.display='none'" class="final-note-btn">
+            One Final Note
+        </button>
     </div>
 </div>
 </body>
