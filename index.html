@@ -446,10 +446,25 @@ function openRose(roseNumber) {
     }
   </script>
  
+</div> </div> <div id="letterOverlay" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); z-index:10000; align-items:center; justify-content:center; backdrop-filter: blur(8px);">
+    <div class="notebook-paper">
+        <div class="margin-line"></div>
+        <h2 style="text-align: center; color: #c2185b; margin: 0 0 25px 0; font-family: cursive;">From My Heart</h2>
+        <div style="color: #333; font-size: 16px; padding-left: 50px; padding-right: 10px; text-align: left;">
+            <p style="margin: 0;">My Dearest,</p>
+            <p style="margin: 0; margin-top: 10px;">Just like a rose, your love fills my life with fragrance and color. I want to tell you that you are my most precious treasure.</p>
+            <p style="margin: 0; margin-top: 10px;">I promise to keep our love blooming forever.</p>
+            <div style="text-align: center; margin-top: 32px; width: 100%;">
+                <span style="color: #c2185b; font-weight: bold;">I love you ❤️ Always Yours ❤️</span>
+            </div>
+        </div>
+        <button onclick="document.getElementById('letterOverlay').style.display='none'" class="final-note-btn">
+            One Final Note
+        </button>
+    </div>
 </div>
-<div id="roseOverlay" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:#fce4ec; z-index:9999; flex-direction:column; align-items:center; justify-content:center; font-family: sans-serif;">
-    <style>
-  /* Notebook Paper Styling */
+
+<style>
   .notebook-paper {
     background: #fff9e6;
     width: 90%;
@@ -460,21 +475,15 @@ function openRose(roseNumber) {
     border-left: 12px solid #c2185b;
     font-family: 'Georgia', serif;
     position: relative;
-    /* 32px line spacing to match text height */
     background-image: repeating-linear-gradient(#fff9e6, #fff9e6 31px, #e1d4ae 32px);
     line-height: 32px; 
+    z-index: 10001;
   }
-
   .margin-line {
     position: absolute;
-    left: 45px;
-    top: 0;
-    bottom: 0;
-    width: 1px;
+    left: 45px; top: 0; bottom: 0; width: 1px;
     background: rgba(255, 0, 0, 0.2);
   }
-
-  /* Animated Pulse Button */
   .final-note-btn {
     display: block;
     margin: 30px auto 0;
@@ -488,63 +497,12 @@ function openRose(roseNumber) {
     box-shadow: 0 4px 15px rgba(194, 24, 91, 0.4);
     animation: pulseBtn 2s infinite;
   }
-
   @keyframes pulseBtn {
     0% { transform: scale(1); }
     50% { transform: scale(1.05); }
     100% { transform: scale(1); }
   }
-
-  /* Keep your Rose bounce animation */
-  @keyframes roseBounce {
-    0%, 100% { transform: translateY(0) scale(1); }
-    50% { transform: translateY(-15px) scale(1.1); }
-  }
-  .animating-rose {
-    display: inline-block;
-    cursor: pointer;
-    font-size: 60px;
-    animation: roseBounce 2s infinite ease-in-out;
-  }
 </style>
 
-    <div style="background: rgba(255, 255, 255, 0.6); padding: 40px; border-radius: 30px; border: 2px solid white; text-align: center; width: 85%; box-shadow: 0 10px 25px rgba(0,0,0,0.05);">
-        <h1 style="color: #c2185b; font-style: italic; font-size: 35px; margin-bottom: 10px;">Pick a Rose</h1>
-        <p style="color: #880e4f; font-size: 16px; margin-bottom: 40px;">One of these roses holds a<br>secret message...</p>
-
-        <div style="display: flex; justify-content: center; gap: 20px;">
-            <span class="animating-rose" onclick="openRose(1)">🌹</span>
-            <span class="animating-rose" onclick="openRose(2)">🌹</span>
-            <span class="animating-rose" onclick="openRose(3)">🌹</span>
-        </div>
-<p id="roseMessage" style="text-align:center; font-weight:bold; margin-top:20px; min-height:20px; font-size:18px; color:#c2185b;"></p>
-        <br><br>
-        <button onclick="document.getElementById('roseOverlay').style.display='none'" style="background:none; border:none; color:#c2185b; text-decoration:underline; cursor:pointer; font-weight:bold;">Go Back</button>
-    </div>
-</div>
-</div>
-<div id="letterOverlay" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); z-index:10000; align-items:center; justify-content:center; backdrop-filter: blur(8px);">
-    
-    <div class="notebook-paper">
-        <div class="margin-line"></div>
-        
-        <h2 style="text-align: center; color: #c2185b; margin: 0 0 25px 0; font-family: cursive;">From My Heart</h2>
-        
-        <div style="color: #333; font-size: 16px; padding-left: 50px; padding-right: 10px; text-align: left;">
-            <p style="margin: 0;">My Dearest,</p>
-            <p style="margin: 0;">Just like a rose, your love fills my life with fragrance and color. I want to tell you that you are my most precious treasure.</p>
-            <p style="margin: 0;">I promise to keep our love blooming forever.</p>
-            
-            <div style="text-align: center; margin-top: 32px; width: 100%;">
-                <span style="color: #c2185b; font-weight: bold;">I love you ❤️ Always Yours ❤️</span>
-            </div>
-        </div>
-
-        <button onclick="document.getElementById('letterOverlay').style.display='none'" class="final-note-btn">
-            One Final Note
-        </button>
-    </div>
-</div>
 </body>
 </html>
-
