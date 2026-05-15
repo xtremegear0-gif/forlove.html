@@ -374,77 +374,9 @@
     function closeMemories() {
       document.getElementById('memoriesOverlay').classList.remove('active');
     }
-<style>
-  .notebook-paper {
-    background: #fff9e6;
-    width: 90%;
-    max-width: 420px;
-    padding: 40px 20px;
-    border-radius: 15px;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-    border-left: 12px solid #c2185b;
-    font-family: 'Georgia', serif;
-    position: relative;
-    background-image: repeating-linear-gradient(#fff9e6, #fff9e6 31px, #e1d4ae 32px);
-    line-height: 32px; 
-  }
-  .margin-line {
-    position: absolute;
-    left: 45px; top: 0; bottom: 0; width: 1px;
-    background: rgba(255, 0, 0, 0.2);
-  }
-  .final-note-btn {
-    display: block;
-    margin: 30px auto 0;
-    padding: 12px 35px;
-    background: #c2185b;
-    color: white;
-    border: none;
-    border-radius: 30px;
-    font-weight: bold;
-    cursor: pointer;
-    box-shadow: 0 4px 15px rgba(194, 24, 91, 0.4);
-    animation: pulseBtn 2s infinite;
-  }
-  @keyframes pulseBtn {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.05); }
-    100% { transform: scale(1); }
-  }
-</style>
-function pickGift() {
-    document.getElementById('roseOverlay').style.display = 'flex';
-}
+</script>
 
-function openRose(roseNumber) {
-    const messageDisplay = document.getElementById('roseMessage');
-    if(roseNumber === 1 || roseNumber === 3) {
-        messageDisplay.innerText = "This one is pretty, but try another!";
-        messageDisplay.style.color = "#c2185b";
-    } else if(roseNumber === 2) {
-        messageDisplay.innerText = "You found it! Now opening your secret note...";
-        messageDisplay.style.color = "green";
-        setTimeout(() => {
-            document.getElementById('letterOverlay').style.display = 'flex';
-        }, 1500);
-    }
-}
-    const scene = document.getElementById('scene');
-    const petals = 18;
-
-    for (let i = 0; i < petals; i++) {
-      const petal = document.createElement('div');
-      petal.className = 'petal';
-      petal.style.left = Math.random() * 100 + 'vw';
-      petal.style.top = Math.random() * 20 + 'vh';
-      petal.style.setProperty('--x', Math.random() * 60 - 30 + 'px');
-      petal.style.setProperty('--r', Math.random() * 90 + 'deg');
-      petal.style.animationDuration = 6 + Math.random() * 4 + 's';
-      petal.style.animationDelay = Math.random() * -8 + 's';
-      petal.style.opacity = 0.75 + Math.random() * 0.2;
-      scene.appendChild(petal);
-    }
- </div> </div> <div id="letterOverlay" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); z-index:10000; align-items:center; justify-content:center; backdrop-filter: blur(8px);">
+<div id="letterOverlay" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); z-index:10000; align-items:center; justify-content:center; backdrop-filter: blur(8px);">
     <div class="notebook-paper">
         <div class="margin-line"></div>
         <h2 style="text-align: center; color: #c2185b; margin: 0 0 25px 0; font-family: cursive;">From My Heart</h2>
@@ -501,5 +433,6 @@ function openRose(roseNumber) {
     100% { transform: scale(1); }
   }
 </style>
+
 </body>
 </html>
